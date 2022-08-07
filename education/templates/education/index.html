@@ -1,0 +1,39 @@
+{% extends 'education/base.html' %}
+{% load static %}
+
+
+{% block title %}
+learnEverything
+{% endblock %}
+
+{% block body %}
+<div class="container" style="display: flex;">
+<div class="card" style="width: 18rem;, display: flex; background-color: #8000ff; color: #fff; margin: 10px;">
+  <img src="{% static 'education/images/math.png' %}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h2 class="card-title"><strong>Математика</strong></h2>
+    <p style="font-size:20px;" class="card-text">Здесь ты научишься складывать и вычитать числа. Считать по порядку даже до тысячи. И многому другому!</p>
+    <a href="{% url 'math' 1 %}" class="btn btn-primary">Давай учить математику</a>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem; display: flex; background-color: #f57b00; color: #fff; margin: 10px;">
+  <img src="{% static 'education/images/world_around.png' %}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h2 class="card-title"><strong>Окружающий мир</strong></h2>
+    <p style="font-size:20px;" class="card-text">Здесь ты узнаешь многое о живой и не живой природе, которая находится вокруг тебя!</p>
+    <a href="{% url 'world_around' %}" class="btn btn-primary">Давай учить окружающий мир</a>
+  </div>
+</div>
+
+
+<div class="card" style="width: 18rem;, display: flex; background-color: #00f539; color: #fff; margin: 10px;">
+  <img src="{% static 'education/images/reading.png' %}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h2 class="card-title"><strong>Чтение</strong></h2>
+    <p style="font-size:20px;" class="card-text">Здесь ты научишься читать не только по слогам, но еще и на скорость, а также узнаешь много новых слов!</p>
+    <a href="{% url 'reading' %}" class="btn btn-primary">Давай учиться чтению</a>
+  </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'education/base.html' %}
+{% load static %}
+
+
+{% block title %}Математика{% endblock %}
+
+{% block body %}
+{% if form.cleaned_data != math_result %}
+<p style="font-family: 'Rubik One', sans-serif;
+  font-size: 100px;
+  text-transform: uppercase;
+  background: #2E2F45;
+  display: table;
+  margin: 20px auto;
+  color: white;
+  border-radius: 5px;
+  mix-blend-mode: multiply;
+  padding: 5px 10px;">
+    {{ math_data.integer1 }} + {{ math_data.integer2 }}
+</p>
+
+<form method="post">
+        {% csrf_token %}
+        {% for f in form %}
+        <div style="position: fixed; top: 30%; left: 40%;" class="mb-3">
+            <label style='font-size: 40px;' for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}
+            <div class="form-error">{{ f.errors }}</div>
+        {% endfor %}
+        <button style="margin-top:20px;"   class='btn btn-primary' type="submit">Я решил!</button>
+            </div>
+         {% endif %}
+</form>
+
+{% if form.cleaned_data == math_result %}
+<style>canvas#c {
+position: absolute;
+top: 0;
+left: 0;
+z-index: -1;
+}</style>
+<canvas style="width: 100px, 100px;" id=c></canvas>
+<script src="{% static 'education/javascript/fw.js' %}"></script>
+
+    <div class="card" style="width: 20rem; background: linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db); margin-top: 30px; margin-bottom: 30px; position: fixed; top: 20%; left: 40%;">
+      <img style="width: 300px; height: 200px;" src="{% static 'education/images/award.png' %}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h2 class="card-text">{{ award }}</h2>
+      </div>
+    </div>
+     {% if math_id != 1 %}
+    <a style="color: #00ffc4; background-color: rgba(42, 95, 82, 0.85); position: fixed; top: 58%; left: 40%;" type="button" class="btn btn-secondary" href="/math/{{ math_id|add:'-1' }}">Прошлый пример</a>
+    {% endif %}
+    <a style="color: #00ffc4; background-color: rgba(42, 95, 82, 0.85); position: fixed; top: 58%; left: 49%;" type="button" class="btn btn-secondary" href="/math/{{ math_id|add:'1' }}">Следующий пример</a>
+{% endif %}
+
+{% if form.cleaned_data != math_result and form.cleaned_data != None %}
+<h1 style="position: fixed; top: 52%; left: 40%;">{{ reward }}</h1>
+{% endif %}
+{% endblock %}

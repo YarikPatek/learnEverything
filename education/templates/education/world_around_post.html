@@ -1,0 +1,20 @@
+{% extends 'education/base.html' %}
+
+{% block title %}Окружающий мир{% endblock %}
+
+
+{% block body %}
+
+
+{% for world_around in world_around_data %}
+<div class="container">
+    <h1 style="color:rgba(0, 167, 255, 0.81); font-weight:bold;" class="text_title"><strong>{{ world_around.title }}</strong></h1>
+    <p class="text"><p href="{{ world_around.photo.url }}"></p>
+    <div class="col-md-8">
+    <a href="{{ world_around.photo.url }}"><img style='width: 80%; height:80%;' src="{{ world_around.photo.url }}" class="photo_to_text" align="top" /></a>
+    <p style="font-size:30px; color:white; font-weight:bold">{{ world_around.content }}</p>
+      </div>
+    </div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'education/base.html' %}
+{% load static %}
+{% block title %}Окружающий мир{% endblock %}
+
+{% block body %}
+
+<div style="display: flex;" class="container">
+  {% for category in category_data %}
+<div class="card" style="width: 18rem; display: flex; background-color: #00ffc4; color: #fff; margin: 10px;">
+  <img src="{{ category.photo.url }}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h2 class="card-title"><strong>{{ category.name }}</strong></h2>
+    <p style="font-size:20px;" class="card-text">{{ category.description }}</p>
+    <a href="{% url 'world_around' %}{{ category.slug }}" class="btn btn-primary">Давай учить {{ category.name }}</a>
+  </div>
+</div>
+  {% endfor %}
+  </div>
+{% endblock %}

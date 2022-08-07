@@ -1,0 +1,45 @@
+background: linear-gradient(90deg, #00c4ff, #00ffc4, #ffce00);
+
+
+background: linear-gradient(to right, #4ecdc4, #556270);
+
+
+
+#000000
+
+
+<div class="media mt-3">
+      <a class="mr-3" href="#">
+        <img class="mr-3" src="{{ comment.user.userprofile.avatar.url }}" style="width: 64px; height: 64px;">
+      </a>
+    </div>
+<h1>Имя: {{ comment.user.first_name }}</h1>
+<h1>Фамилия: {{ comment.user.last_name }}</h1>
+<h3>Комментарий: {{ comment.content }}</h3>
+<h5>Время создания: {{ comment.time_create }}</h5>
+
+
+
+
+
+
+{% extends 'education/base.html' %}
+
+{% block title %}Чтение{% endblock %}
+
+{% block body %}
+    {% for reading in reading_data %}
+    <div class="text_reading">
+        {% if reading.photo %}
+            <p style="margin-bottom: 30px; margin: 30px; position: absolute;"><img class="photo_to_text" src="{{ reading.photo.url }}"></p>
+        {% endif %}
+
+        <h1 style="position: absolute; left: 40%; text-align: justify; margin: 50px;" class="text_title"><strong>{{reading.title}}</strong></h1>
+        <p style=" margin-top: 30px; margin: 30px; position: absolute; top: 20%; left: 33%; text-align: justify;" class="h1">{{reading.content}}</p>
+        </div>
+    {% endfor %}
+    {% if textid != 1 %}
+    <a style="color: #00baff; position: absolute; top: 80%; left: 50%; background-color: #3b00ff" type="button" class="btn btn-secondary" href="/reading/{{ textid|add:'-1' }}">Прошлый текст</a>
+    {% endif %}
+    <a style="color: #00baff; position: absolute; top: 80%; left: 50%; background-color: #3b00ff; text-size: 40px;" type="button" class="btn btn-secondary" href="/reading/{{ textid|add:'1' }}">Следующий текст</a>
+{% endblock %}

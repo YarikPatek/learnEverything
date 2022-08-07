@@ -1,0 +1,30 @@
+{% extends 'education/base.html' %}
+
+{% block title %}Редактировать профиль{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+    {% if user.id == userprofile.user.id %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-error">{{ form.non_field_errors }}</div>
+
+    {% for f in form %}
+    <div style="position: fixed; top: 30%; left: 5%; font-size: 30px;" class="form-group">
+    <label style='font-size: 30px; margin: 15px;' for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}
+    <div class="form-error">{{ f.errors }}</div>
+    {% endfor %}
+    <button style="margin-top:20px;" class='btn btn-primary' type="submit">Сохранить</button>
+        </div>
+</form>
+
+{% else %}
+
+<div style="font-size:30px; margin-top:40px;" class="alert alert-danger" role="alert">
+  Вы не имеете права изменять эту страницу
+</div>
+
+{% endif %}
+{% endif %}
+{% endblock %}

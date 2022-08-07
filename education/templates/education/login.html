@@ -1,0 +1,21 @@
+{% extends 'education/base.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block body %}
+<form method="post">
+    {% if not request.user.is_authenticated %}
+    {% csrf_token %}
+
+    <div class="form-error">{{ form.non_field_errors }}</div>
+
+    {% for f in form %}
+    <div style="margin-top:15px;" class="mb-3">
+    <label style='font-size: 30px; margin: 10px;' for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}
+    <div class="form-error">{{ f.errors }}</div>
+    {% endfor %}
+    <button style="margin-top:20px;" class='btn btn-primary' type="submit">Вход</button>
+        </div>
+</form>
+{% endif %}
+{% endblock %}

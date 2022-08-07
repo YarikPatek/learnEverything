@@ -1,0 +1,25 @@
+{% extends 'education/base.html' %}
+{% load static %}
+{% block title %}Дополнительная информация{% endblock %}
+
+{% block body %}
+<div style="margin-top: 30px;" class="media">
+  <img style="width: 128px; height: 128px;" src="{% static 'education/images/thanks.png' %}" class="align-self-start mr-3" alt="...">
+  <div class="media-body">
+    <h5 class="mt-0">Поддержать автора</h5>
+    <p style="font-size: 25px;">Если вы хотите поддержать автора данного сайта отправьте любую сумму на номер карты указанный ниже:</p>
+    <p>
+    <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Посмотреть номер карты</a>
+    </p>
+<div class="row">
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample1">
+      <div class="card card-body">
+        Номер карты
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+{% endblock %}

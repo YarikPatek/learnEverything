@@ -1,0 +1,33 @@
+{% extends 'education/base.html' %}
+
+{% block title %}Чтение{% endblock %}
+
+{% block body %}
+    {% for reading in reading_data %}
+    <div class="text_reading">
+        {% if reading.photo %}
+            <p style="margin-bottom: 30px; margin-top: 30px;"><img class="photo_to_text" src="{{ reading.photo.url }}"></p>
+        {% endif %}
+
+        <h1 class="text_title"><strong>{{reading.title}}</strong></h1>
+        <p style="margin-bottom: 30px; margin-top: 30px;" class="h1">{{reading.content}}</p>
+        </div>
+    {% endfor %}
+
+    {% if reading_data.has_other_pages %}
+<nav style="position: absolute; left: 40%; margin-top: 25px;" aria-label="">
+  <ul class="pagination pagination-lg">
+      {% for page in reading_data.paginator.page_range %}
+      {% if reading_data.number == page %}
+      <li class="page-item active" aria-current="page">
+        <span class="page-link">{{ page }}</span>
+    </li>
+      {% elif page >= reading_data.number|add:-2 and page <= reading_data.number|add:2 %}
+    <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+      {% endif %}
+      {% endfor %}
+  </ul>
+</nav>
+{% endif %}
+
+{% endblock %}

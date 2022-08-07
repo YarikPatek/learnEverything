@@ -1,0 +1,65 @@
+{% extends 'education/base.html' %}
+{% load static %}
+{% block title %}Комментарии и пожелания{% endblock %}
+
+{% block body %}
+<form action="" method="post">
+        {% csrf_token %}
+        {% for f in form %}
+        <div style="margin-top:15px;" class="mb-3">
+            <label style='font-size: 30px; margin: 10px;' for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}
+        <div class="form-error">{{ f.errors }}</div>
+        {% endfor %}
+        <button style="margin-top:20px;" class='btn btn-primary' type="submit">Оставить комментарий</button>
+            </div>
+    </form>
+
+<section>
+  <div class="container my-5 py-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12 col-lg-10">
+        <div class="card text-dark">
+          <div class="card-body p-4">
+            <h4 class="mb-0">Комментарии ({{ comments_count }})</h4>
+            <p class="fw-light mb-4 pb-2">Пожалуйста будьте вежливы в комментариях</p>
+
+
+              {% for comment in comments_data %}
+
+            <div class="d-flex flex-start" style="margin: 15px;">
+                {% if comment.user.userprofile.avatar %}
+              <img class="rounded-circle shadow-1-strong me-3" style="margin-right: 15px;"
+                src="{{ comment.user.userprofile.avatar.url }}" alt="avatar" width="60"
+                height="60" />
+                {% else %}
+                <img class="rounded-circle shadow-1-strong me-3" style="margin-right: 15px;"
+                src="{% static 'education/images/avatar.png' %}" alt="avatar" width="60"
+                height="60" />
+                {% endif %}
+              <div>
+                  {% if comment.user.is_staff %}
+                <h6 class="fw-bold mb-1">{{ comment.user.first_name }} {{ comment.user.last_name }} - <strong>Администратор</strong></h6>
+                  {% else %}
+                  <h6 class="fw-bold mb-1">{{ comment.user.first_name }} {{ comment.user.last_name }}</h6>
+                  {% endif %}
+                <div class="d-flex align-items-center mb-3">
+                  <p class="mb-0">
+                    {{ comment.time_create }}
+                  </p>
+                </div>
+                <p class="mb-0">
+                 {{ comment.content }}
+                </p>
+              </div>
+            </div>
+                <hr class="my-0" />
+               {% endfor %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
